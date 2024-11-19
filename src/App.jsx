@@ -74,7 +74,7 @@ function App() {
 
   return (
     <main className="w-full font-Inter h-screen overflow-hidden mx-auto bg-primary flex items-center justify-center xl:p-8">
-      <section className="flex flex-col p-8 gap-6 w-full max-w-[479px] border border-[#454040] justify-center items-center mx-auto shadow-xl rounded-2xl">
+      <section className="flex flex-col p-4 xl:p-8 gap-6 w-full max-w-[479px] border border-[#454040] justify-center items-center mx-auto shadow-xl rounded-2xl">
         <div className="flex flex-row w-full justify-between items-center">
           <div className="flex flex-row gap-2">
             <div className="w-4 h-4 bg-[#FF5F5A] rounded-full"></div>
