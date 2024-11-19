@@ -73,7 +73,7 @@ function App() {
   };
 
   return (
-    <main className="w-full font-Inter h-screen overflow-hidden mx-auto bg-primary flex items-center justify-center p-8">
+    <main className="w-full font-Inter h-screen overflow-hidden mx-auto bg-primary flex items-center justify-center xl:p-8">
       <section className="flex flex-col p-8 gap-6 w-full max-w-[479px] border border-[#454040] justify-center items-center mx-auto shadow-xl rounded-2xl">
         <div className="flex flex-row w-full justify-between items-center">
           <div className="flex flex-row gap-2">
@@ -119,13 +119,13 @@ function App() {
             <div className="flex flex-row h-full gap-[13px] w-full">
               <button
                 onClick={() => handleInput("True")}
-                className="bg-[#1F1F1F] h-full font-bold p-5 rounded-lg text-white w-1/2 hover:bg-[#2A2A2A] active:scale-95 transition transform"
+                className="bg-[#1F1F1F] h-full font-bold p-5 rounded-lg text-white w-[80px] xl:w-[107px] hover:bg-[#2A2A2A] active:scale-95 transition transform"
               >
                 True
               </button>
               <button
                 onClick={() => handleInput("False")}
-                className="bg-[#1F1F1F] h-full font-bold p-5 rounded-lg text-white w-1/2 hover:bg-[#2A2A2A] active:scale-95 transition transform"
+                className="bg-[#1F1F1F] h-full font-bold p-5 rounded-lg text-white w-[80px] xl:w-[107px] hover:bg-[#2A2A2A] active:scale-95 transition transform"
               >
                 False
               </button>
