@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
+import Gradient from "./assets/gd.svg"
 
 function App() {
   
 
   return (
     <main class="w-full h-screen font-Inter overflow-hidden mx-auto bg-primary flex items-center justify-center px-4 xl:p-8 ">
-        <img class="xl:hidden absolute bottom-0 w-full" src="./assets/svg/gd.svg" alt="" />
+        <img class="xl:hidden absolute bottom-0 w-full" src={Gradient} alt="" />
         <section
             class="flex flex-col gap-6 w-full xl:max-w-[479px] xl:p-8 border border-[#454040] px-6 py-6 justify-center items-center mx-auto shadow-xl rounded-2xl bg-opacity-50 backdrop-blur-lg">
             <div class="flex flex-row w-full justify-between items-center">
