@@ -41,7 +41,7 @@ const LanguageDropdown = ({ selectedLanguage, setSelectedLanguage }) => {
                     {languages.map((lang) => (
                         <div
                             key={lang.code}
-                            className={`px-4 py-2 text-sm cursor-pointer hover:bg-primary hover:bg-opacity-80 transition-all ${lang.code === selectedLanguage
+                            className={`px-4 py-3 text-sm cursor-pointer hover:bg-primary hover:bg-opacity-80 transition-all ${lang.code === selectedLanguage
                                     ? "bg-primary bg-opacity-80 font-bold"
                                     : ""
                                 }`}
