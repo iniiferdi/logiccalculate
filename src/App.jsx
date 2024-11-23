@@ -5,7 +5,7 @@ import Titik from "./assets/titik.svg"
 
 import LanguageDropdown from "./components/LanguageDropdown";
 import LayarOutput from "./components/LayarOutput";
-import OperatorButton from "./components/operatorButton";
+import OperatorButton from "./components/OperatorButton";
 import ClearButton from "./components/ClearButton";
 import ParenthesesButtons from "./components/ParenthesesButtons";
 import BackspaceButton from "./components/BackspaceButton";
