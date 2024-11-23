@@ -44,11 +44,11 @@ function App() {
 
 
     return (
-        <main className="w-full min-h-screen  font-Inter overflow-hidden mx-auto bg-primary flex items-center justify-center px-4 xl:p-8 ">
+        <main className="w-full min-h-screen  font-Inter overflow-hidden mx-auto bg-black flex items-center justify-center px-4 xl:p-8 ">
             <img className="xl:hidden absolute top-0 w-full" src={Gradient} alt="" />
 
             <section
-                className="flex flex-col gap-6 w-full xl:max-w-[479px] xl:p-8 border border-[#454040] px-6 py-6 justify-center items-center mx-auto shadow-xl rounded-2xl bg-opacity-50 backdrop-blur-lg">
+                className="flex flex-col gap-6 w-full xl:max-w-[479px] xl:p-8 border border-[#454040] px-6 py-6 justify-center items-center bg-primary mx-auto shadow-xl rounded-2xl bg-opacity-50 backdrop-blur-lg">
 
                 <div className="flex flex-row w-full justify-between items-center">
                     <img src={Titik} alt="titik" />

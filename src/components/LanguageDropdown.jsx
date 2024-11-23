@@ -17,7 +17,7 @@ const LanguageDropdown = ({ selectedLanguage, setSelectedLanguage }) => {
     return (
         <div className="relative z-50">
             <div
-                className="flex  items-center space-x-2 cursor-pointer  px-3 py-2 rounded-lg transition-all duration-300"
+                className="flex  items-center space-x-2 cursor-pointer   rounded-lg transition-all duration-300"
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <h1 className="text-white text-lg font-semibold">
