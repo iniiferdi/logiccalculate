@@ -5,20 +5,36 @@ function App() {
     const [input, setInput] = useState("");
     const [cursorVisible, setCursorVisible] = useState(true);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCursorVisible((prev) => !prev); // Toggle visibility
-        }, 500); // Kursor berkedip setiap 500ms
-        return () => clearInterval(interval); // Hapus interval saat komponen di-unmount
-    }, []);
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedLanguage, setSelectedLanguage] = useState("EN");
 
-    const handleOperatorClick = (operator) => {
-        setInput((prev) => prev + operator); // Tambahkan simbol operator ke input
+    const languages = [
+        { code: "EN", name: "English" },
+        { code: "IN", name: "Indonesian" },
+        { code: "ML", name: "Mechine" },
+    ];
+
+    const buttonLabels = {
+        EN: { true: "True", false: "False" },
+        IN: { true: "Benar", false: "Salah" },
+        ML: { true: "1", false: "0" },
+    };
+
+    const handleSelect = (code) => {
+        setSelectedLanguage(code);
+        setIsOpen(false);
     };
 
     const handleBackspaceClick = () => {
-        setInput((prev) => prev.slice(0, -1)); // Hapus karakter terakhir
+        setInput((prev) => prev.slice(0, -1));
     };
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCursorVisible((prev) => !prev);
+        }, 500);
+        return () => clearInterval(interval);
+    }, []);
 
 
     return (
@@ -26,14 +42,39 @@ function App() {
             <img className="xl:hidden absolute bottom-0 w-full" src={Gradient} alt="" />
             <section
                 className="flex flex-col gap-6 w-full xl:max-w-[479px] xl:p-8 border border-[#454040] px-6 py-6 justify-center items-center mx-auto shadow-xl rounded-2xl bg-opacity-50 backdrop-blur-lg">
-                <div className="flex flex-row w-full justify-between items-center">
-                    <svg width="68" height="16" viewBox="0 0 68 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="8" cy="8" r="8" fill="#FF5F5A" />
-                        <circle cx="34" cy="8" r="8" fill="#FFBE2E" />
-                        <circle cx="60" cy="8" r="8" fill="#2ACA44" />
-                    </svg>
+                <div className="relative flex justify-between w-full">
+                    <div
+                        className="flex flex-row items-center w-full justify-between space-x-2 cursor-pointer"
+                        onClick={() => setIsOpen(!isOpen)}
+                    >
+                        <svg
+                            width="68"
+                            height="16"
+                            viewBox="0 0 68 16"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <circle cx="8" cy="8" r="8" fill="#FF5F5A" />
+                            <circle cx="34" cy="8" r="8" fill="#FFBE2E" />
+                            <circle cx="60" cy="8" r="8" fill="#2ACA44" />
+                        </svg>
+                        <h1 className="text-white">{selectedLanguage}</h1>
+                    </div>
+                    {isOpen && (
+                        <div className="absolute right-0 mt-8 z-50 w-32  bg-opacity-70 backdrop-blur-md text-white rounded shadow-lg">
+                            {languages.map((lang) => (
+                                <div
+                                    key={lang.code}
+                                    className={`px-4 py-2 cursor-pointer hover:bg--700 bg-opacity-50 ${lang.code === selectedLanguage ? "bg-primary bg-opacity-50" : ""
+                                        }`}
+                                    onClick={() => handleSelect(lang.code)}
+                                >
+                                    {lang.name}
+                                </div>
+                            ))}
+                        </div>
 
-                    <h1 className="text-white">EN</h1>
+                    )}
                 </div>
 
                 <div className="w-full h-[60px] bg-[#1F1F1F] rounded-md shadow-inner text-white p-2 flex items-center justify-end">
@@ -69,17 +110,17 @@ function App() {
                             {/* Tombol True */}
                             <button
                                 className="bg-[#1F1F1F] hover:shadow-lg active:shadow-md duration-200 h-full font-bold p-5 rounded-lg text-white hover:bg-[#2A2A2A] active:scale-95 transition transform"
-                                onClick={() => setInput("True")} // Atur teks input menjadi "True"
+                                onClick={() => setInput(buttonLabels[selectedLanguage].true)} // Sesuaikan teks berdasarkan bahasa
                             >
-                                True
+                                {buttonLabels[selectedLanguage].true}
                             </button>
 
                             {/* Tombol False */}
                             <button
                                 className="bg-[#1F1F1F] h-full font-bold p-5 rounded-lg text-white hover:bg-[#2A2A2A] active:scale-95 transition transform"
-                                onClick={() => setInput("False")} // Atur teks input menjadi "False"
+                                onClick={() => setInput(buttonLabels[selectedLanguage].false)} // Sesuaikan teks berdasarkan bahasa
                             >
-                                False
+                                {buttonLabels[selectedLanguage].false}
                             </button>
                         </div>
                     </div>
