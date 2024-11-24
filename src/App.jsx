@@ -19,6 +19,7 @@ function App() {
     const [cursorVisible, setCursorVisible] = useState(true);
     const [selectedLanguage, setSelectedLanguage] = useState("EN");
     const [isValueInputted, setIsValueInputted] = useState(false);
+    const [isOperatorSelected, setIsOperatorSelected] = useState(false);
 
     const buttonLabels = {
         EN: { true: "True", false: "False" },
@@ -29,20 +30,47 @@ function App() {
     const handleValueInput = (value) => {
         setInput((prev) => prev + value);
         setIsValueInputted(true);
+        setIsOperatorSelected(false);
     };
 
     const handleOperatorInput = (operator) => {
-        setInput((prev) => prev + ` ${operator} `);
-        setIsValueInputted(false);
+        if (!isOperatorSelected && isValueInputted) {
+            setInput((prev) => prev + " " + operator + " ");
+            setIsOperatorSelected(true);
+            setIsValueInputted(false);
+        }
     };
+
+    const calculateResult = () => {
+        try {
+            // Convert the input to a logic expression compatible with JavaScript
+            const logicExpression = input
+                .replace(/\s∧\s/g, " && ")  // AND
+                .replace(/\s∨\s/g, " || ")  // OR
+                .replace(/\s⊕\s/g, " !== ") // XOR
+                .replace(/\s→\s/g, " <= ")  // Implication
+                .replace(/\s↔\s/g, " === ") // Biconditional
+                .replace(/¬/g, "!")         // Negation
+                .replace(/\bTrue\b/g, "true")  // Convert "True" to JavaScript boolean
+                .replace(/\bFalse\b/g, "false"); // Convert "False" to JavaScript boolean
+    
+            // Evaluate the logic expression using Function
+            const evaluatedResult = new Function(`return ${logicExpression}`)();
+    
+            // Set the result based on the evaluation and the selected language
+            setResult(evaluatedResult ? buttonLabels[selectedLanguage].true : buttonLabels[selectedLanguage].false);
+        } catch (error) {
+            // If there's an error in evaluating the expression
+            setResult("Error");
+            console.error("Invalid logical expression:", error);
+        }
+    };
+    
+
+
 
     const handleBackspaceClick = () => {
         setInput((prev) => prev.slice(0, -1));
-    };
-
-    const handleEqualClick = () => {
-        const evaluatedResult = evaluateExpression(input);
-        setResult(evaluatedResult);
     };
 
     useEffect(() => {
@@ -91,7 +119,8 @@ function App() {
                                 />
 
                                 <ParenthesesButtons
-
+                                    handleOpenParen={() => handleParenthesesInput("(")}
+                                    handleCloseParen={() => handleParenthesesInput(")")}
                                 />
                             </div>
 
@@ -118,13 +147,11 @@ function App() {
                             />
 
                             <OperatorButton
-                                onOperatorClick={(operator) => handleOperatorInput(operator)}
+                                onOperatorClick={handleOperatorInput}
                                 disabled={!isValueInputted}
                             />
 
-                            <EqualButton
-                                onClick={handleEqualClick}
-                            />
+                            <EqualButton onClick={calculateResult} />
                         </div>
 
                     </div>
