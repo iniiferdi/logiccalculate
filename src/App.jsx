@@ -13,6 +13,9 @@ import BackspaceButton from "./components/BackspaceButton";
 import EqualButton from "./components/EqualButton";
 import InputButton from "./components/InputButton";
 
+import LoadingPage from "./components/LoadingPage";
+import WelcomeScreen from "./components/WelcomeScreen";
+
 function App() {
     const [input, setInput] = useState("");
     const [result, setResult] = useState("");
@@ -20,6 +23,8 @@ function App() {
     const [selectedLanguage, setSelectedLanguage] = useState("EN");
     const [isValueInputted, setIsValueInputted] = useState(false);
     const [isOperatorSelected, setIsOperatorSelected] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isWelcomeDone, setIsWelcomeDone] = useState(false);
 
     const buttonLabels = {
         EN: { true: "True", false: "False" },
@@ -53,10 +58,10 @@ function App() {
                 .replace(/¬/g, "!")         // Negation
                 .replace(/\bTrue\b/g, "true")  // Convert "True" to JavaScript boolean
                 .replace(/\bFalse\b/g, "false"); // Convert "False" to JavaScript boolean
-    
+
             // Evaluate the logic expression using Function
             const evaluatedResult = new Function(`return ${logicExpression}`)();
-    
+
             // Set the result based on the evaluation and the selected language
             setResult(evaluatedResult ? buttonLabels[selectedLanguage].true : buttonLabels[selectedLanguage].false);
         } catch (error) {
@@ -65,13 +70,30 @@ function App() {
             console.error("Invalid logical expression:", error);
         }
     };
-    
+
 
 
 
     const handleBackspaceClick = () => {
         setInput((prev) => prev.slice(0, -1));
     };
+
+
+    const handleWelcomeFinish = () => {
+        setIsWelcomeDone(true); // Mark welcome screen as finished
+    };
+
+
+
+    // Make sure that the loading state is set only once
+    useEffect(() => {
+        if (isLoading) {
+            const timer = setTimeout(() => {
+                setIsLoading(false); // Set isLoading to false after 2 seconds
+            }, 2000);
+            return () => clearTimeout(timer); // Cleanup the timeout when the component unmounts
+        }
+    }, [isLoading]); // Only runs when isLoading is true
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -80,6 +102,11 @@ function App() {
         return () => clearInterval(interval);
     }, []);
 
+    if (isLoading) {
+        return <LoadingPage />; // Show loading page until isLoading becomes false
+    }
+
+    
 
     return (
         <main className="w-full min-h-screen  font-Inter overflow-hidden mx-auto bg-black  flex items-center justify-center px-4 xl:p-8 ">
