@@ -14,12 +14,12 @@ const OperatorButton = ({ onOperatorClick, disabled }) => {
                 <button
                     key={symbol}
                     className={`bg-[#1F1F1F] font-bold rounded-lg flex items-center justify-center w-full xl:w-[55px] h-10 text-white ${
-                        disabled
+                        disabled && symbol !== "¬" // Negasi tidak terpengaruh disabled
                             ? "opacity-50 cursor-not-allowed"
                             : "hover:scale-110 hover:shadow-lg active:shadow-md duration-200 active:scale-95 transition transform"
                     }`}
-                    onClick={() => !disabled && onOperatorClick(symbol)}
-                    disabled={disabled}
+                    onClick={() => (symbol === "¬" || !disabled) && onOperatorClick(symbol)}
+                    disabled={disabled && symbol !== "¬"} // Negasi tidak pernah disable
                     title={description}
                 >
                     {symbol}

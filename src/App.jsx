@@ -13,8 +13,6 @@ import BackspaceButton from "./components/BackspaceButton";
 import EqualButton from "./components/EqualButton";
 import InputButton from "./components/InputButton";
 
-import LoadingPage from "./components/LoadingPage";
-
 function App() {
     const [input, setInput] = useState("");
     const [result, setResult] = useState("");
@@ -22,7 +20,7 @@ function App() {
     const [selectedLanguage, setSelectedLanguage] = useState("EN");
     const [isValueInputted, setIsValueInputted] = useState(false);
     const [isOperatorSelected, setIsOperatorSelected] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+
 
     const buttonLabels = {
         EN: { true: "True", false: "False" },
@@ -33,22 +31,29 @@ function App() {
     const handleValueInput = (value) => {
         if (value === "(" || value === ")") {
             setInput((prev) => prev + value);
-            return; // Tidak mempengaruhi isValueInputted atau isOperatorSelected
+            return;
         }
-    
+
         setInput((prev) => prev + value);
         setIsValueInputted(true);
         setIsOperatorSelected(false);
     };
-    
+
 
     const handleOperatorInput = (operator) => {
+        if (operator === "¬") {
+            // Khusus untuk negasi, langsung tambahkan operator tanpa bergantung pada nilai sebelumnya
+            setInput((prev) => `${prev} ${operator} `);
+            return;
+        }
+    
         if (!isOperatorSelected && isValueInputted) {
             setInput((prev) => `${prev} ${operator} `);
             setIsOperatorSelected(true);
             setIsValueInputted(false);
         }
     };
+    
 
     const handleBackspaceClick = () => {
         setInput((prev) => prev.trimEnd().slice(0, -1));
@@ -61,54 +66,44 @@ function App() {
     };
 
     const convertToLogicExpression = (expression) => {
-        return expression
-            .replace(/\s∧\s/g, " && ")  // AND
-            .replace(/\s∨\s/g, " || ")  // OR
-            .replace(/\s⊕\s/g, " !== ") // XOR
-            .replace(/\s→\s/g, " <= ")  // Implication
-            .replace(/\s↔\s/g, " === ") // Biconditional
-            .replace(/¬/g, "!")         // Negation
-            .replace(/\bTrue\b|\bBenar\b/g, "true")  // Support both "True" and "Benar"
-            .replace(/\bFalse\b|\bSalah\b/g, "false"); // Support both "False" and "Salah"
+        const replacements = {
+            ' ∧ ': ' && ', // AND
+            ' ∨ ': ' || ', // OR
+            ' ⊕ ': ' !== ', // XOR
+            ' → ': ' <= ', // Implication
+            ' ↔ ': ' === ', // Biconditional
+            '¬': '!', // Negation
+            '\\bTrue\\b|\\bBenar\\b': 'true', // True support
+            '\\bFalse\\b|\\bSalah\\b': 'false' // False support
+        };
+
+        return Object.entries(replacements).reduce((expr, [key, value]) => {
+            return expr.replace(new RegExp(key, 'g'), value);
+        }, expression);
     };
-    
 
     const calculateResult = () => {
         try {
             const logicExpression = convertToLogicExpression(input);
-    
-            // Validasi tanda kurung
-            const openParens = (logicExpression.match(/\(/g) || []).length;
-            const closeParens = (logicExpression.match(/\)/g) || []).length;
-            if (openParens !== closeParens) {
+
+            if ((logicExpression.match(/\(/g) || []).length !== (logicExpression.match(/\)/g) || []).length) {
                 setResult("Invalid expression");
                 return;
             }
-    
-            // Evaluasi ekspresi
+
             const evaluatedResult = new Function(`return ${logicExpression}`)();
-            const output = evaluatedResult
-                ? buttonLabels[selectedLanguage].true
-                : buttonLabels[selectedLanguage].false;
-            setResult(output);
-        } catch {
+            setResult(evaluatedResult ? buttonLabels[selectedLanguage].true : buttonLabels[selectedLanguage].false);
+        } catch (error) {
             setResult("Invalid expression");
-            console.error("Error: Invalid logical expression");
+            console.error("Error: Invalid logical expression", error);
         }
     };
-    
-
-    useEffect(() => {
-        const timer = setTimeout(() => setIsLoading(false), 2000);
-        return () => clearTimeout(timer);
-    }, []);
-
     useEffect(() => {
         const interval = setInterval(() => setCursorVisible((prev) => !prev), 500);
         return () => clearInterval(interval);
     }, []);
 
-    if (isLoading) return <LoadingPage />;
+
 
     return (
         <main className="w-full min-h-screen font-Inter overflow-hidden mx-auto bg-black flex items-center justify-center px-4 xl:p-8">
