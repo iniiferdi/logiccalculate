@@ -61,7 +61,7 @@ function App() {
             setResult(evaluatedResult ? buttonLabels[selectedLanguage].true : buttonLabels[selectedLanguage].false);
         } catch (error) {
             // If there's an error in evaluating the expression
-            setResult("Error");
+            setResult("Tolol");
             console.error("Invalid logical expression:", error);
         }
     };
