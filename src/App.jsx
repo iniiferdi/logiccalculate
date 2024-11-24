@@ -14,7 +14,6 @@ import EqualButton from "./components/EqualButton";
 import InputButton from "./components/InputButton";
 
 import LoadingPage from "./components/LoadingPage";
-import WelcomeScreen from "./components/WelcomeScreen";
 
 function App() {
     const [input, setInput] = useState("");
@@ -78,10 +77,6 @@ function App() {
         setInput((prev) => prev.slice(0, -1));
     };
 
-
-    const handleWelcomeFinish = () => {
-        setIsWelcomeDone(true); // Mark welcome screen as finished
-    };
 
 
 
