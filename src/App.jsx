@@ -109,10 +109,10 @@ function App() {
             <img className="xl:hidden absolute top-0 w-full" src={Gradient} alt="" />
             <img className="absolute top-0 right-0 z-0" src={XlGradient} alt="" />
 
-            <div className="flex xl:flex-row flex-col gap-6 items-center w-full max-w-6xl justify-between">
-                <div className="xl:flex hidden flex-col xl:gap-4 w-full">
-                    <h1 className="font-bold text-xl xl:text-5xl text-white">LogiCalculator</h1>
-                    <h2 className="font-medium opacity-65 text-lg xl:text-xl text-white">Cepat, Tepat, dan Mudah!</h2>
+            <div className="flex xl:flex-row flex-col gap-8 items-center w-full max-w-6xl justify-between z-40">
+                <div className="flex flex-col gap-4 w-full items-center xl:items-start">
+                    <h1 className="font-bold text-5xl text-white">LogiCalculator</h1>
+                    <h2 className="font-medium opacity-65 text-xl text-white">Cepat, Tepat, dan Mudah!</h2>
                 </div>
 
                 <section className="flex flex-col gap-6 w-full xl:max-w-[479px] xl:p-8 border border-[#454040] px-6 py-6 justify-center items-center bg-[#807878] bg-opacity-5 mx-auto shadow-xl rounded-2xl backdrop-blur-xl">
