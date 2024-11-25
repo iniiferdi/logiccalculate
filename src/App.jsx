@@ -42,18 +42,17 @@ function App() {
 
     const handleOperatorInput = (operator) => {
         if (operator === "¬") {
-            // Khusus untuk negasi, langsung tambahkan operator tanpa bergantung pada nilai sebelumnya
             setInput((prev) => `${prev} ${operator} `);
             return;
         }
-    
+
         if (!isOperatorSelected && isValueInputted) {
             setInput((prev) => `${prev} ${operator} `);
             setIsOperatorSelected(true);
             setIsValueInputted(false);
         }
     };
-    
+
 
     const handleBackspaceClick = () => {
         setInput((prev) => prev.trimEnd().slice(0, -1));
@@ -125,7 +124,7 @@ function App() {
                     <LayarOutput input={input} result={result} cursorVisible={cursorVisible} />
 
                     <div className="flex flex-row justify-between w-full gap-6">
-                        <div className="flex flex-col w-full gap-6">
+                        <div className="flex flex-col w-full gap-6 justify-between">
                             <div className="flex flex-row xl:gap-6 gap-4 w-full xl:justify-between">
                                 <ClearButton clearAll={clearAll} />
                                 <ParenthesesButtons
