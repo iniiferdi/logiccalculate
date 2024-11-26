@@ -110,7 +110,7 @@ function App() {
             <img className="absolute top-0 right-0 z-0" src={XlGradient} alt="" />
 
             <div className="flex xl:flex-row flex-col gap-8 items-center w-full max-w-6xl justify-between z-40">
-                <div className="flex flex-col gap-4 w-full items-center xl:items-start">
+                <div className="xl:flex hidden flex-col gap-4 w-full items-center xl:items-start">
                     <h1 className="font-bold text-5xl text-white">LogiCalculator</h1>
                     <h2 className="font-medium opacity-65 text-xl text-white">Cepat, Tepat, dan Mudah!</h2>
                 </div>
