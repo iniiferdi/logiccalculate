@@ -106,7 +106,7 @@ function App() {
 
         } catch (error) {
             setResult("Invalid expression");
-            console.error("Error: Invalid logical expression", error);
+            console.error("Error: Invalid logical expressions", error);
         }
     };
 
