@@ -64,6 +64,8 @@ function App() {
         setIsValueInputted(false);
     };
 
+    // Koversi bentuk logika menjadi logic oprations
+
     const convertToLogicExpression = (expression) => {
         const replacements = {
             ' ∧ ': ' && ', // AND
@@ -85,18 +87,29 @@ function App() {
         try {
             const logicExpression = convertToLogicExpression(input);
 
+            // pengecekan cumlah tanda kurung jika false menampilkan Invalid expression
             if ((logicExpression.match(/\(/g) || []).length !== (logicExpression.match(/\)/g) || []).length) {
                 setResult("Invalid expression");
                 return;
             }
 
+            // membuat fungsi baru secara dinamis yang meretrun oprasi logika
+            // return = True && False
+            // Hasilnya disimpan di variabel evaluatedResult
             const evaluatedResult = new Function(`return ${logicExpression}`)();
-            setResult(evaluatedResult ? buttonLabels[selectedLanguage].true : buttonLabels[selectedLanguage].false);
+
+            // mengeset hasil atau reslut sesuai dengan bahasa
+            setResult(
+                evaluatedResult ? buttonLabels[selectedLanguage].true
+                : buttonLabels[selectedLanguage].false
+            );
+
         } catch (error) {
             setResult("Invalid expression");
             console.error("Error: Invalid logical expression", error);
         }
     };
+
     useEffect(() => {
         const interval = setInterval(() => setCursorVisible((prev) => !prev), 500);
         return () => clearInterval(interval);
