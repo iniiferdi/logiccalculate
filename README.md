@@ -21,3 +21,10 @@ LogicCalculate adalah aplikasi berbasis web yang dirancang untuk mempermudah pen
 Cek aplikasi langsung di sini: [LogicCalculate](https://logiccalculate.vercel.app)
 
 ## 📂 Struktur Folder
+├── public ├── src │ ├── components │ ├── logicOperations.js │ └── ... ├── index.html ├── package.json ├── tailwind.config.js └── vite.config.js
+
+## 🚀 Cara Menjalankan Aplikasi
+1. Clone repository ini:
+   ```bash
+   git clone https://github.com/iniiferdi/logiccalculate.git
+
