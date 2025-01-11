@@ -1,8 +1,23 @@
-# React + Vite
+# 🧠 LogicCalculate
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+LogicCalculate adalah aplikasi berbasis web yang dirancang untuk mempermudah pengguna dalam melakukan berbagai operasi logika matematika. Aplikasi ini mendukung format input seperti `(0 dan 1)`, `(benar dan salah)`, serta `(true dan false)`, sehingga fleksibel untuk berbagai kebutuhan.
 
-Currently, two official plugins are available:
+## 🌟 Fitur Utama
+- 🚀 **Operasi Logika**: 
+  - AND (Konjungsi)
+  - OR (Disjungsi)
+  - NOT (Negasi)
+  - IMPLIKASI
+- 💡 **Dukungan Input**:
+  - Format Biner: `0` dan `1`
+  - Format Boolean: `true` dan `false`
+  - Format Bahasa Indonesia: `benar` dan `salah`
+- 🎨 **Antarmuka Modern**:
+  - Dibangun menggunakan **TailwindCSS** untuk tampilan responsif dan estetis.
+- ⚡ **Performa Cepat**:
+  - Dikembangkan menggunakan **React.js** dan **Vite**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌐 Demo Langsung
+Cek aplikasi langsung di sini: [LogicCalculate](https://logiccalculate.vercel.app)
+
+## 📂 Struktur Folder
