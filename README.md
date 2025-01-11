@@ -28,18 +28,23 @@ Check out the deployed application here:
 
 ## 📂 Folder Structure
 
-```
-LogicCalculate/
-├── public/               # Static assets
-├── src/                  # Source code
-│   ├── components/       # Reusable components
-│   ├── logicOperations.js # Core logic operation functions
-├── .gitignore            # Ignored files and folders
-├── index.html            # Main entry file
-├── package.json          # Node.js dependencies
-├── README.md             # Documentation
-├── tailwind.config.js    # TailwindCSS configuration
-└── vite.config.js        # Vite.js configuration
+```plaintext
+logiccalculate/
+├── node_modules/           # Node.js dependencies (auto-generated)
+├── public/                 # Static assets (images, icons, etc.)
+├── src/                    # Source code
+│   ├── assets/             # Assets such as images or icons
+│   ├── components/         # Reusable UI components
+│   │   ├── App.jsx         # Main application component
+│   │   └── main.jsx        # Application entry point
+├── .gitignore              # Files and folders to ignore in Git
+├── index.html              # Main HTML file
+├── logicOperations.js      # Core logical operations
+├── package-lock.json       # Lock file for npm dependencies
+├── package.json            # Project metadata and dependencies
+├── postcss.config.js       # PostCSS configuration
+├── tailwind.config.js      # TailwindCSS configuration
+├── vite.config.js          # Vite configuration file
 ```
 
 ---
